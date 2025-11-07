@@ -41,7 +41,7 @@ export const PageNavigation = ({
       {pages.map((page) => (
         <div
           key={page.id}
-          className={`group flex items-center gap-1 px-3 py-1.5 rounded-md transition-colors ${
+          className={`flex items-center gap-1 px-3 py-1.5 rounded-md transition-colors ${
             currentPageId === page.id
               ? 'bg-primary text-primary-foreground'
               : 'bg-secondary hover:bg-secondary/80'
