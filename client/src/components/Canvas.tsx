@@ -202,20 +202,6 @@ export const Canvas = ({
     setIsDrawing(false);
   };
 
-  // Handle keyboard events for delete
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.key === 'Delete' || e.key === 'Backspace') && selectedShapeId) {
-        e.preventDefault();
-        onDeleteShape(selectedShapeId);
-        setSelectedShapeId(null);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedShapeId, onDeleteShape]);
-
   return (
     <div ref={containerRef} className="relative flex-1 bg-[hsl(var(--canvas-bg))]">
       <canvas
