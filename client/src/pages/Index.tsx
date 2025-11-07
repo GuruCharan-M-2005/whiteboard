@@ -3,11 +3,11 @@ import { Canvas } from '@/components/Canvas';
 import { Toolbar } from '@/components/Toolbar';
 import { PageNavigation } from '@/components/PageNavigation';
 import { useShapes } from '@/hooks/useShapes';
-import { Tool } from '@/types/shapes';
-import { toast } from 'sonner';
+import { Tool, Page } from '@/types/shapes';
 
 const Index = () => {
   const [activeTool, setActiveTool] = useState<Tool>('select');
+  const [backendStorage, setBackendStorage] = useState<Page[]>([]);
   const {
     shapes,
     addShape,
@@ -19,10 +19,18 @@ const Index = () => {
     addPage,
     renamePage,
     deletePage,
+    clearCurrentPage,
+    loadPages,
   } = useShapes();
 
-  const handleSync = () => {
-    toast.info('Backend sync not implemented yet. Shapes are saved locally!');
+  const handleSaveToBackend = () => {
+    setBackendStorage(JSON.parse(JSON.stringify(pages)));
+  };
+
+  const handleLoadFromBackend = () => {
+    if (backendStorage.length > 0) {
+      loadPages(backendStorage);
+    }
   };
 
   return (
@@ -30,7 +38,9 @@ const Index = () => {
       <Toolbar
         activeTool={activeTool}
         onToolChange={setActiveTool}
-        onSync={handleSync}
+        onSave={handleSaveToBackend}
+        onLoad={handleLoadFromBackend}
+        onClear={clearCurrentPage}
       />
       
       <PageNavigation
