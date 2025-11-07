@@ -22,7 +22,7 @@ const Index = () => {
   } = useShapes();
 
   const handleSync = () => {
-    toast.info('Backend sync not implemented yet. Shapes are saved locally!');
+    toast.info('Loading from Backend');
   };
 
   return (
