@@ -93,6 +93,19 @@ export const useShapes = () => {
     });
   }, [pages.length, currentPageId]);
 
+  const clearCurrentPage = useCallback(() => {
+    setPages(prev => prev.map(page => 
+      page.id === currentPageId 
+        ? { ...page, shapes: [] }
+        : page
+    ));
+  }, [currentPageId]);
+
+  const loadPages = useCallback((newPages: Page[]) => {
+    setPages(newPages);
+    setCurrentPageId(newPages[0]?.id || '');
+  }, []);
+
   return {
     shapes,
     addShape,
@@ -104,5 +117,7 @@ export const useShapes = () => {
     addPage,
     renamePage,
     deletePage,
+    clearCurrentPage,
+    loadPages,
   };
 };

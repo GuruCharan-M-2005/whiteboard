@@ -11,15 +11,18 @@ import {
   Type,
   Download,
   Upload,
+  Trash2,
 } from 'lucide-react';
 
 interface ToolbarProps {
   activeTool: Tool;
   onToolChange: (tool: Tool) => void;
-  onSync: () => void;
+  onSave: () => void;
+  onLoad: () => void;
+  onClear: () => void;
 }
 
-export const Toolbar = ({ activeTool, onToolChange, onSync }: ToolbarProps) => {
+export const Toolbar = ({ activeTool, onToolChange, onSave, onLoad, onClear }: ToolbarProps) => {
   const tools = [
     { id: 'select' as Tool, icon: MousePointer2, label: 'Select' },
     { id: 'pencil' as Tool, icon: Pencil, label: 'Pencil' },
@@ -50,13 +53,17 @@ export const Toolbar = ({ activeTool, onToolChange, onSync }: ToolbarProps) => {
       <Separator orientation="vertical" className="h-6 mx-2" />
       
       <div className="flex items-center gap-2">
-        <Button variant="outline" size="sm" onClick={onSync} className="gap-2">
+        <Button variant="outline" size="sm" onClick={onSave} className="gap-2">
           <Upload className="h-4 w-4" />
           Save to Backend
         </Button>
-        <Button variant="outline" size="sm" onClick={onSync} className="gap-2">
+        <Button variant="outline" size="sm" onClick={onLoad} className="gap-2">
           <Download className="h-4 w-4" />
           Load from Backend
+        </Button>
+        <Button variant="outline" size="sm" onClick={onClear} className="gap-2">
+          <Trash2 className="h-4 w-4" />
+          Clear Canvas
         </Button>
       </div>
     </div>
